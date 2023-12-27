@@ -31,15 +31,16 @@ public class ProductService {
         return productRepository.findAll().stream().map(this::setImage).toList();
     }
 
-    public void save(Image image) {
-        imageRepository.save(image);
-    }
-
-    public void saveProduct(Product product) {
-        productRepository.save(product);
+    public Product save(Image image) {
+        return setImage(imageRepository.save(image).getProduct());
     }
 
     public Image getImageByProductId(Long id) {
         return imageRepository.findImageByProductId(id).orElse(null);
+    }
+
+    public Boolean delete(Long id) {
+        imageRepository.deleteImageByProductId(id);
+        return Boolean.TRUE;
     }
 }

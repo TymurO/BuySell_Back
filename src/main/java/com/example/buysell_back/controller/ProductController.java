@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
@@ -45,15 +46,26 @@ public class ProductController {
         Product product = objectMapper.readValue(productJson, Product.class);
         Image image = ImageUtils.toImageFromFile(photo);
         image.setProduct(product);
-        System.out.println(image);
-        System.out.println(product);
-        productService.save(image);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
+                        .data(Map.of("product", productService.save(image)))
                         .message("Data was saved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Response> deleteProduct(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("deleted", productService.delete(id)))
+                        .message("Product's deleted")
+                        .status(OK)
+                        .statusCode(OK.value())
                         .build()
         );
     }
