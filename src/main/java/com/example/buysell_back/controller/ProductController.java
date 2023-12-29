@@ -83,7 +83,7 @@ public class ProductController {
 //        );
 //    }
 
-    @GetMapping(path = "/image/{id}", produces = IMAGE_PNG_VALUE)
+    @GetMapping("/image/{id}")
     public byte[] getProductImage(@PathVariable("id") Long id) {
         Image image = productService.getImageByProductId(id);
         if (image != null) {
