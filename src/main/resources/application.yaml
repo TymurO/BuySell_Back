@@ -3,7 +3,7 @@ spring:
   datasource:
     password: admin
     username: admin
-    url: jdbc:postgresql://localhost:5432/buysell_angular
+    url: jdbc:postgresql://postgres:5432/buysell_angular
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,3 +12,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  main:
+    allow-circular-references: true
+
+jwt:
+  secret: SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  lifetime: 30m

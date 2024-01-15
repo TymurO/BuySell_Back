@@ -20,7 +20,7 @@ public class ProductService {
 
     private final ImageRepository imageRepository;
 
-    private static final String URL = "http://localhost:8080/product/image/";
+    private static final String URL = "http://13.53.130.193/product/image/";
 
     public Product setImage(Product product) {
         product.setImageUrl(URL + product.getId());
