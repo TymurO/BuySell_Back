@@ -1,6 +1,7 @@
 package com.example.buysell_back.service;
 
 import com.example.buysell_back.dto.RegistrationUserDto;
+import com.example.buysell_back.model.Role;
 import com.example.buysell_back.model.User;
 import com.example.buysell_back.repository.RoleRepository;
 import com.example.buysell_back.repository.UserRepository;
@@ -52,7 +53,15 @@ public class UserDetailsService implements org.springframework.security.core.use
         return userRepository.save(user);
     }
 
+    public Role createRole(Role role) {
+        return roleRepository.save(role);
+    }
+
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username).orElse(null);
+    }
+
+    public Role getRoleByName(String name) {
+        return roleRepository.getRoleByName(name).orElse(null);
     }
 }

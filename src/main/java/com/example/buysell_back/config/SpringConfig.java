@@ -40,10 +40,11 @@ public class SpringConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().disable()
-                .cors().disable()
+                .cors()
+                .and()
                 .authorizeHttpRequests()
-//                .requestMatchers("/students/u/**").authenticated()
-//                .requestMatchers("/students/a/**").hasRole("ADMIN")
+////                .requestMatchers("/students/u/**").authenticated()
+////                .requestMatchers("/students/a/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

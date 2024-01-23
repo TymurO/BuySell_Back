@@ -3,6 +3,7 @@ package com.example.buysell_back.service;
 import com.example.buysell_back.dto.JwtRequest;
 import com.example.buysell_back.dto.RegistrationUserDto;
 import com.example.buysell_back.model.Response;
+import com.example.buysell_back.model.Role;
 import com.example.buysell_back.model.User;
 import com.example.buysell_back.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
@@ -103,5 +104,13 @@ public class AuthService {
                         .statusCode(HttpStatus.OK.value())
                         .build()
         );
+    }
+
+    public Role createRole(Role role) {
+        return userDetailsService.createRole(role);
+    }
+
+    public boolean existsRole(String role) {
+        return userDetailsService.getRoleByName(role) != null;
     }
 }

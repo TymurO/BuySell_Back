@@ -1,5 +1,8 @@
 package com.example.buysell_back;
 
+import com.example.buysell_back.model.Role;
+import com.example.buysell_back.service.AuthService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,32 +19,21 @@ public class BuysellBackApplication {
         SpringApplication.run(BuysellBackApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner run(ProductRepository productRepository) {
-//        return args -> {
-////            productRepository.save(new Product(null, "PlayStation 5", 128.5, "New PS"));
-////            productRepository.save(new Product(null, "Table", 500.0, "Black wooden table"));
-////            productRepository.save(new Product(null, "Window", 285.7, "Plastic window"));
-//            productRepository.save(Product.builder()
-//                    .id(null)
-//                    .name("PlayStation 5")
-//                    .price(128.5)
-//                    .description("New PS")
-//                    .build());
-//            productRepository.save(Product.builder()
-//                    .id(null)
-//                    .name("Table")
-//                    .price(500.0)
-//                    .description("Black wooden table")
-//                    .build());
-//            productRepository.save(Product.builder()
-//                    .id(null)
-//                    .name("Window")
-//                    .price(285.7)
-//                    .description("Plastic window")
-//                    .build());
-//        };
-//    }
+    @Bean
+    CommandLineRunner run(AuthService authService) {
+        return args -> {
+            if (!authService.existsRole("ROLE_USER")) {
+                authService.createRole(Role.builder()
+                        .name("ROLE_USER")
+                        .build());
+            }
+            if (!authService.existsRole("ROLE_ADMIN")) {
+                authService.createRole(Role.builder()
+                        .name("ROLE_ADMIN")
+                        .build());
+            }
+        };
+    }
 
     @Bean
     public CorsFilter corsFilter() {

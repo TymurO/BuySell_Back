@@ -19,6 +19,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+
     @PostMapping("/auth")
     public ResponseEntity<Response> createAuthToken(@RequestBody JwtRequest authRequest) {
         return authService.createAuthToken(authRequest);
